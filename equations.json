@@ -1,0 +1,37 @@
+[
+  {
+    "firstNumber": "323",
+    "secondNumber": "323",
+    "sign": "/",
+    "answer": 1.0,
+    "time": "2023-03-07T14:18:26.2696324+01:00"
+  },
+  {
+    "firstNumber": "12",
+    "secondNumber": "3",
+    "sign": "-",
+    "answer": 9.0,
+    "time": "2023-03-07T14:20:04.981546+01:00"
+  },
+  {
+    "firstNumber": "34",
+    "secondNumber": "21",
+    "sign": "*",
+    "answer": 714.0,
+    "time": "2023-03-07T14:20:35.3471457+01:00"
+  },
+  {
+    "firstNumber": "23",
+    "secondNumber": "12",
+    "sign": "+",
+    "answer": 35.0,
+    "time": "2023-03-07T14:28:13.7967397+01:00"
+  },
+  {
+    "firstNumber": "12",
+    "secondNumber": "5",
+    "sign": "%",
+    "answer": 2.0,
+    "time": "2023-03-07T14:28:41.3183776+01:00"
+  }
+]

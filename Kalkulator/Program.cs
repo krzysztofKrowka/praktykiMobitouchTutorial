@@ -1,4 +1,12 @@
-﻿namespace Kalkulator
+﻿using Newtonsoft.Json;
+using System.IO;
+using System.Net.Http.Json;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
+using System.Xml.Linq;
+
+namespace Kalkulator
 {
     internal class Program
     {
@@ -40,6 +48,25 @@
                 default:
                     break;
             }
+            string filePath = "C:\\Users\\Użytkownik\\Desktop\\3 Technikum\\Praktyki\\Kalkulator\\equations.json";
+            string oldJson = File.ReadAllText("equations.json");
+            List<Equation> oldEquations = JsonConvert.DeserializeObject<List<Equation>>(File.ReadAllText(filePath));
+            List<Equation> equations = new List<Equation>(20);
+            if (oldEquations != null)
+            {
+                foreach (Equation equation in oldEquations)
+                { equations.Add(equation); }
+            }
+            equations.Add(new Equation()
+            {
+                firstNumber = arguments[0],
+                secondNumber = arguments[2],
+                sign = arguments[1],
+                answer = answer,
+                time = DateTime.Now
+            });
+            string json = JsonConvert.SerializeObject(equations,formatting: Formatting.Indented);
+            File.WriteAllText(filePath, json);
             return answer;
         }
         public static Random random = new Random();
