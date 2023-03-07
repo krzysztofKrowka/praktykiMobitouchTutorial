@@ -9,7 +9,28 @@ using System.Xml.Linq;
 namespace Kalkulator
 {
     internal class Program
-    {
+    {   
+        /// <summary>
+        /// Adds equation to json file with passed path
+        /// </summary>
+        /// <param name="path">path to file</param>
+        /// <param name="equation">equation which is going to be saved</param>
+        public static void AddToFile(string path,Equation equation)
+        {
+            if (File.Exists(path))
+            {
+                List<Equation> oldEquations = JsonConvert.DeserializeObject<List<Equation>>(File.ReadAllText(path));
+                List<Equation> equations = new List<Equation>(20);
+                if (oldEquations != null)
+                {
+                    foreach (Equation oldEquation in oldEquations)
+                    { equations.Add(oldEquation); }
+                }
+                equations.Add(equation);
+                string json = JsonConvert.SerializeObject(equations, formatting: Formatting.Indented);
+                File.WriteAllText(path, json);
+            }
+        }
         /// <summary>
         /// Calculate simple operations
         /// </summary>
@@ -49,24 +70,15 @@ namespace Kalkulator
                     break;
             }
             string filePath = "C:\\Users\\Użytkownik\\Desktop\\3 Technikum\\Praktyki\\Kalkulator\\equations.json";
-            string oldJson = File.ReadAllText("equations.json");
-            List<Equation> oldEquations = JsonConvert.DeserializeObject<List<Equation>>(File.ReadAllText(filePath));
-            List<Equation> equations = new List<Equation>(20);
-            if (oldEquations != null)
-            {
-                foreach (Equation equation in oldEquations)
-                { equations.Add(equation); }
-            }
-            equations.Add(new Equation()
+            Equation equation = new Equation()
             {
                 firstNumber = arguments[0],
                 secondNumber = arguments[2],
                 sign = arguments[1],
                 answer = answer,
                 time = DateTime.Now
-            });
-            string json = JsonConvert.SerializeObject(equations,formatting: Formatting.Indented);
-            File.WriteAllText(filePath, json);
+            };
+            AddToFile(filePath, equation);
             return answer;
         }
         public static Random random = new Random();
