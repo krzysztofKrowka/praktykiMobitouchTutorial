@@ -2,6 +2,46 @@
 {
     internal class Program
     {
+        /// <summary>
+        /// Calculate simple operations
+        /// </summary>
+        /// <param name="operation">Operation in string - 2 numbers separated with operation sign and spaces</param>
+        /// <returns>Answer to the operation</returns>
+        public static double Calculate(string operation)
+        {
+            double answer = 0;
+            var arguments = operation.Split(" ");
+            switch (arguments[1].ToString())
+            {
+                case "+":
+                    answer = Convert.ToDouble(arguments[0]) + Convert.ToDouble(arguments[2]);
+                    break;
+
+                case "-":
+                    answer = Convert.ToDouble(arguments[0]) - Convert.ToDouble(arguments[2]);
+                    break;
+
+                case "*":
+                    answer = Convert.ToDouble(arguments[0]) * Convert.ToDouble(arguments[2]);
+                    break;
+
+                case "/":
+                    answer = Convert.ToDouble(arguments[0]) / Convert.ToDouble(arguments[2]);
+                    break;
+
+                case "^":
+                    answer = Math.Pow(Convert.ToDouble(arguments[0]), Convert.ToDouble(arguments[2]));
+                    break;
+
+                case "%":
+                    answer = Convert.ToDouble(arguments[0]) % Convert.ToDouble(arguments[2]);
+                    break;
+
+                default:
+                    break;
+            }
+            return answer;
+        }
         public static Random random = new Random();
         static void Main(string[] args)
         {
@@ -131,6 +171,18 @@
             
                Console.WriteLine($"'o' appears {letterCount} times.");*/
 
+
+            //Calculator
+            Console.WriteLine("Write operation in format \nNumber Sign Number \nTo exit write 'EXIT'");
+            while (true)
+            {
+                string operation = Console.ReadLine();
+                if (operation == "EXIT")
+                    break;
+                double answer = Calculate(operation);
+                Console.WriteLine($"{operation} = {answer}");
+            }
+            
         }
     }
 }
