@@ -15,19 +15,19 @@ namespace Kalkulator
         /// </summary>
         /// <param name="path">path to file</param>
         /// <param name="equation">equation which is going to be saved</param>
-        public static void AddToFile(string path,Equation equation)
+        public static void AddToFile<T>(string path,T equation)
         {
             if (File.Exists(path))
             {
-                List<Equation> oldEquations = JsonConvert.DeserializeObject<List<Equation>>(File.ReadAllText(path));
-                List<Equation> equations = new List<Equation>(20);
-                if (oldEquations != null)
+                List<T> oldJson = JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(path));
+                List<T> newJson = new List<T>(20);
+                if (oldJson != null)
                 {
-                    foreach (Equation oldEquation in oldEquations)
-                    { equations.Add(oldEquation); }
+                    foreach (T oldElement in oldJson)
+                    { newJson.Add(oldElement); }
                 }
-                equations.Add(equation);
-                string json = JsonConvert.SerializeObject(equations, formatting: Formatting.Indented);
+                newJson.Add(equation);
+                string json = JsonConvert.SerializeObject(newJson, formatting: Formatting.Indented);
                 File.WriteAllText(path, json);
             }
         }
